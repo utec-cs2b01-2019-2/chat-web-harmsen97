@@ -42,7 +42,7 @@
 }
 
 .portlet .portlet-widgets .dropdown-menu a {
-    color: #ffc107;
+    color: rgba(66, 32, 76, 0.9);
 }
 
 .portlet .portlet-widgets ul.dropdown-menu {
