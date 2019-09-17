@@ -10,9 +10,42 @@ engine = db.createEngine()
 
 app = Flask(__name__)
 
+#stateless interaction 
+@app.route('/cuantasletras/<nombre>')
+def cuantas_letras(nombre):
+    return str(len(nombre))
+
+#stateful interaction 
+@app.route('/suma/<numero>')
+
+def suma(numero):
+    if 'suma' not in session:
+         session['suma']=0
+    suma = session ['suma']
+    suma = suma + int(numero)
+    session['suma'] = suma
+    return str(suma)    
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+
+#login 
+@app.route('/authenticate', methods = ['POST'])
+def authenticate():
+    username = request.form['username'] 
+    password = request.form['password']
+    if username == 'Jeronimo' and password == 'password':
+        session['usuario'] = username;
+        return redirect('http://127.0.0.1:8000/static/chat.html')
+        
+    else:
+
+	    return "disculpas " + username + " no esta registrado"
+
+
 
 @app.route('/static/<content>')
 def static_content(content):
@@ -176,28 +209,28 @@ def send_message():
     session.commit()
     return 'Message sent'
 
-@app.route('/authenticate', methods = ['POST'])
-def authenticate():
-    #Get data form request
-    time.sleep(3)
-    message = json.loads(request.data)
-    username = message['username']
-    password = message['password']
+#@app.route('/authenticate', methods = ['POST'])
+#def authenticate():
+#    #Get data form request
+#    time.sleep(3)
+#    message = json.loads(request.data)  
+#    username = message['username']
+#    password = message['password']
 
     # Look in database
-    db_session = db.getSession(engine)
+#    db_session = db.getSession(engine)
 
-    try:
-        user = db_session.query(entities.User
-            ).filter(entities.User.username==username
-            ).filter(entities.User.password==password
-            ).one()
-        session['logged_user'] = user.id
-        message = {'message':'Authorized'}
-        return Response(message, status=200,mimetype='application/json')
-    except Exception:
-        message = {'message':'Unauthorized'}
-        return Response(message, status=401,mimetype='application/json')
+#    try:
+#        user = db_session.query(entities.User
+#            ).filter(entities.User.username==username
+#            ).filter(entities.User.password==password
+#            ).one()
+#        session['logged_user'] = user.id
+#        message = {'message':'Authorized'}
+#        return Response(message, status=200,mimetype='application/json')
+#    except Exception:
+#        message = {'message':'Unauthorized'}
+#        return Response(message, status=401,mimetype='application/json')
 
 @app.route('/current', methods = ['GET'])
 def current_user():
@@ -210,16 +243,6 @@ def logout():
     session.clear()
     return render_template('login.html')
 
-
-@app.route('/cuantasletras/<nombre>')
-def cuantas_letras(nombre):
-    print(len(nombre))
-    return str(len(nombre))
-
-
 if __name__ == '__main__':
     app.secret_key = ".."
     app.run(debug=True,port=8000, threaded=True, host=('127.0.0.1'))
-
-
-
