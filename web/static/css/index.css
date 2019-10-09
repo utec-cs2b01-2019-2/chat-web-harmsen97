@@ -1,9 +1,7 @@
 /*---------index---------------*/
-body {
-    text-align-last: left;
-  }
+
 .button{
-    background-color: #e0a800;
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;

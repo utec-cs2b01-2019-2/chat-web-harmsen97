@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>CSPlataformas</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/libs/style.css"> </link>
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+        <title>Login</title>
+
+</head>
+    <body>
     <div class="inner-screen">
-      <div class="form">
-          <form  method="post" action="/login">
-            <h1>Formulario</h1>
-            <input class="box" name="user" type="text"  placeholder="Enter your email" />
-            <input class="box" name="password" type="password" placeholder="Password" />
-             <input type="submit" value="Login" />
-            <a href="https://www.google.com/" target="_blank">Forgot password?</a>
-          </form>
-          </div>
+        <div class="form">
+            <h2 class="log"> Login </h2>
+            <form method="post" action="/login">
+                <input type="text" placeholder="Enter your username" name="username" />
+                <input type="password" placeholder="password" name="password" />
+                <input type="submit" value="Log In" />
+                
+            </form>
+            <button type="btn" class="btn btn-primary"
+            onclick="window.location.href='http://127.0.0.1:8000/static/Create_user.html'">Create user</button>
         </div>
-  </body>
+        
+    </div>
+    </body>
 </html>
