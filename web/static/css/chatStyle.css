@@ -23,7 +23,7 @@ body{
 .headLeft-section{
 	width: calc(30% - 1px);
 	float: left;
-	border-right:1px solid #E6E6E6;
+	border-right:1px solid #bd2130;
 }
 .headLeft-sub{
 	padding: 15px;
